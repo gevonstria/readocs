@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+  app-local:
+    container_name: readocs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "python manage.py runserver 0.0.0.0:8080"
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    volumes:
+      - ./readocs:/readocs
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    restart: always
+    profiles:
+      - local
+
+  app-server:
+    container_name: readocs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "python manage.py runserver 0.0.0.0:8080"
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    volumes:
+      - ./readocs:/readocs
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    restart: always
+    profiles:
+      - server
+
+  db:
+    container_name: readocs_postgresql
+    image: postgres:14.1-alpine
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
