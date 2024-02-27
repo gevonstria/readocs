@@ -22,7 +22,7 @@ class ProjectApiDocsView(View):
 
     def get(self, request, project_id, project_name):
         if not request.user.is_authenticated:
-            return redirect("/login")
+            return redirect("/login?src=" +request.path)
 
         project = Project.objects.get(id=project_id)
         context = {

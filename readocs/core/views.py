@@ -10,11 +10,13 @@ class LoginPageView(View):
         return render(request, self.template_name, context={})
 
     def post(self, request):
-        print()
         user = authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
         if user is not None:
             login(request, user)
-            return redirect("/")
+            if "src" in request.GET:
+                return redirect(request.GET["src"])
+            else:
+                return redirect("/")
         else:
             context = {
                 "message": "Invalid Credentials"
