@@ -27,7 +27,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ['DEBUG'] == 'TRUE'
 
 ALLOWED_HOSTS = (os.environ['ALLOWED_HOSTS']).split(",")
-CSRF_TRUSTED_ORIGINS = (os.environ['ALLOWED_HOSTS']).split(",")
+CSRF_TRUSTED_ORIGINS = (os.environ['CSRF_TRUSTED_ORIGINS']).split(",")
 
 # Application definition
 
