@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from core.views import LoginPageView
-from projects.views import ProjectPageView
+from core.views import LoginPageView, LogoutView
+from projects.views import ProjectPageView, ProjectApiDocsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login', LoginPageView.as_view(), name='login'),
-    path('projects', ProjectPageView.as_view(), name='projects'),
+    path('logout', LogoutView.as_view(), name='logout'),
+    path('', ProjectPageView.as_view(), name='projects'),
+    path('docs/<int:project_id>/<str:project_name>', ProjectApiDocsView.as_view(), name='swaggers'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'projects',
-    'swaggers',
     'django_cleanup.apps.CleanupConfig',
 ]
 
