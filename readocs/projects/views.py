@@ -9,7 +9,9 @@ class ProjectPageView(View):
         if not request.user.is_authenticated:
             return redirect("/login")
 
-        projects = Project.objects.all()
+        # get user groups
+        user_group = request.user.groups.all()
+        projects = Project.objects.filter(allowed_group__in=user_group)
         context = {
             "projects": projects
         }

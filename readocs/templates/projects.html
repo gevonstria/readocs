@@ -36,13 +36,15 @@
                       <a href="/docs/{{ project.id }}/{{ project.name }}" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1">{{ project.name }}</h5>
-                          <small class="text-muted">3 days ago</small>
+                          <!-- <small class="text-muted">3 days ago</small> -->
                         </div>
                         <p class="mb-1">{{ project.description }}</p>
                         <small class="text-muted">{{ project.upload.name }}</small>
                       </a>
                     {% endfor %}
                     </div>
+                    {% else %}
+                    <p>No Project Linked.</p>
                     {% endif %}
                   </div>
                 </div>
